@@ -4,7 +4,11 @@ name = "NEON-Data-Skills"
 platforms = ["linux-64", "osx-arm64"]
 version = "0.1.0"
 
-[tasks]
+[tasks.start]
+depends-on = ["tutorial"]
+
+[tasks.tutorial]
+cmd = "Rscript ./neon-download-explore-content.R"
 
 [dependencies]
 r-neonutilities = ">=3.0.3,<4"
