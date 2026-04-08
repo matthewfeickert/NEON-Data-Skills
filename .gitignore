@@ -103,3 +103,7 @@ ENV/
 .ropeproject
 
 /tutorials-in-development/R/aquatics/cuahsi-neon-webinar/neon_env
+
+# pixi environments
+.pixi/*
+!.pixi/config.toml
