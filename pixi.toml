@@ -10,12 +10,20 @@ depends-on = ["tutorial"]
 [tasks.tutorial]
 cmd = "Rscript ./neon-download-explore-content.R"
 
+[tasks.lint]
+cmd = "air format ./neon-download-explore-content.R"
+
 [dependencies]
 r-neonutilities = ">=3.0.3,<4"
 r-neonos = ">=1.1.0,<2"
 r-terra = ">=1.9_11,<2"
 # provides codetools to avoid warnings in terra
 r-recommended = ">=4.5,<5"
+# for air
+python = ">=3.14.4,<3.15"
 
 [activation]
 scripts = ["setup.sh"]
+
+[pypi-dependencies]
+air-formatter = ">=0.9.0, <0.10"
