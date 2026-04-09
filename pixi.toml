@@ -14,3 +14,5 @@ cmd = "Rscript ./neon-download-explore-content.R"
 r-neonutilities = ">=3.0.3,<4"
 r-neonos = ">=1.1.0,<2"
 r-terra = ">=1.9_11,<2"
+# provides codetools to avoid warnings in terra
+r-recommended = ">=4.5,<5"
