@@ -101,17 +101,21 @@ if (!file.exists(file.path(savepath, "aqu_plant_chem.rds"))) {
 loaded_apchem <- readRDS(file.path(savepath, "aqu_plant_chem.rds"))
 names(loaded_apchem)
 
-png(file.path(savepath, "box_plot.png"), width = 800, height = 600)
+p_box1 <- ggplot2::ggplot(
+  data = loaded_apchem$apl_plantExternalLabDataPerSample[
+    which(loaded_apchem$apl_plantExternalLabDataPerSample$analyte == "d13C"),
+  ],
+  aes(x = siteID, y = analyteConcentration)
+) +
+  ggplot2::geom_boxplot() +
+  ggplot2::labs(x = "Site", y = "d13C")
 
-boxplot(
-  analyteConcentration ~ siteID,
-  data = loaded_apchem$apl_plantExternalLabDataPerSample,
-  subset = analyte == "d13C",
-  xlab = "Site",
-  ylab = "d13C"
+ggplot2::ggsave(
+  file.path(savepath, "box_plot.png"),
+  plot = p_box1,
+  width = 8,
+  height = 6
 )
-
-dev.off()
 
 
 apct <- neonOS::joinTableNEON(
@@ -121,14 +125,17 @@ apct <- neonOS::joinTableNEON(
   name2 = "apl_plantExternalLabDataPerSample"
 )
 
-png(file.path(savepath, "box_plot_2.png"), width = 800, height = 600)
-boxplot(
-  analyteConcentration ~ scientificName,
-  data = apct,
-  subset = analyte == "d13C",
-  xlab = NA,
-  ylab = "d13C",
-  las = 2,
-  cex.axis = 0.7
+p_box2 <- ggplot2::ggplot(
+  data = apct[which(apct$analyte == "d13C"), ],
+  aes(x = scientificName, y = analyteConcentration)
+) +
+  ggplot2::geom_boxplot() +
+  ggplot2::labs(x = NULL, y = "d13C") +
+  ggplot2::theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 7))
+
+ggplot2::ggsave(
+  file.path(savepath, "box_plot_2.png"),
+  plot = p_box2,
+  width = 8,
+  height = 6
 )
-dev.off()
