@@ -13,6 +13,9 @@ api_token <- Sys.getenv("NEON_TOKEN")
 savepath <- file.path("data")
 dir.create(savepath, showWarnings = FALSE, recursive = TRUE)
 
+figure_dir <- file.path("figures")
+dir.create(figure_dir, showWarnings = FALSE, recursive = TRUE)
+
 stacked_files_path <- file.path(savepath, "filesToStack00024", "stackedFiles")
 # https://cran.r-project.org/web/packages/neonUtilities/refman/neonUtilities.html#zipsByProduct
 # if (!dir.exists(stacked_files_path)) {
@@ -76,7 +79,7 @@ p <- ggplot2::ggplot() +
   )
 
 ggplot2::ggsave(
-  file.path(savepath, "par_plot.png"),
+  file.path(figure_dir, "par_plot.png"),
   plot = p,
   width = 8,
   height = 6
@@ -111,7 +114,7 @@ p_box1 <- ggplot2::ggplot(
   ggplot2::labs(x = "Site", y = "d13C")
 
 ggplot2::ggsave(
-  file.path(savepath, "box_plot.png"),
+  file.path(figure_dir, "box_plot.png"),
   plot = p_box1,
   width = 8,
   height = 6
@@ -134,7 +137,7 @@ p_box2 <- ggplot2::ggplot(
   ggplot2::theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 7))
 
 ggplot2::ggsave(
-  file.path(savepath, "box_plot_2.png"),
+  file.path(figure_dir, "box_plot_2.png"),
   plot = p_box2,
   width = 8,
   height = 6
